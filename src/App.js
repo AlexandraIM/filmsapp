@@ -8,9 +8,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header header="My Favorite Films"/>
+        <Header header="Some cool films"/>
         <Films/>
-
       </div>
     );
   }

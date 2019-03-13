@@ -1,11 +1,12 @@
 import React from 'react';
+import './Film.css';
 
 const film = (props) => {
   return (
-    <div>
-      <h2>Title</h2>
-      <img alt="film poster"/>
-      <p>Description</p>
+    <div className="film">
+      <img alt="film poster" src={props.src}></img>
+      <h2>{props.title}</h2>
+      <p>{props.description}</p>
     </div>
   )
 }
