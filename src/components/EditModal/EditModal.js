@@ -1,19 +1,22 @@
 import React,  { Component } from 'react';
-import PropTypes from 'prop-types';
 import Button from '../Button/Button';
+import { connect } from 'react-redux';
+import {closeEditModal, saveFilm} from '../../actions/actions';
 
 import './EditModal.css';
 
 class EditModal extends Component {
-   constructor(props){
-     super(props);
-     this.state = {
-       img : props.film.img,
-       title: props.film.title,
-       description: props.film.description,
-       id: props.film.id
-     }
-   }
+  state = {
+    imdbID:'',
+    Poster:'',
+    Title:'',
+    Year:''
+  }
+
+  componentDidMount(){
+      this.setState({...this.props.film});
+  }
+
 
   changeHandler =(e) => {
     const name = e.target.name;
@@ -23,19 +26,18 @@ class EditModal extends Component {
   }
 
   render(){
-    
     return (
       <div className="backdrop">
         <div className="modal">
-          <form>
+          <form >
             <label>Image source:</label>
-            <input type="text" value={this.state.img} name="img" onChange={this.changeHandler}/>
+            <input type="text" value={this.state.Poster} name="Poster" onChange={this.changeHandler}/>
             <label>Title:</label>
-            <input type="text" value={this.state.title} name="title" onChange={this.changeHandler}/> 
-            <label>Description</label>
-            <textarea value={this.state.description} name="description" onChange={this.changeHandler}></textarea>
-            <Button clicked={(e)=>this.props.onSave(e,this.state)} >Save</Button>
-            <Button clicked={this.props.onCancel}>Cancel</Button>
+            <input type="text" value={this.state.Title} name="Title" onChange={this.changeHandler}/> 
+            <label>Year</label>
+            <input type="text" value={this.state.Year} name="Year" onChange={this.changeHandler}/>
+            <Button clicked={() => this.props.save(this.state)}>Save</Button>
+            <Button clicked={this.props.closeEdit}>Cancel</Button>
           </form>
         </div>
       </div>
@@ -44,15 +46,18 @@ class EditModal extends Component {
   }
 }
 
-EditModal.propTypes = {
-  film: PropTypes.shape({
-    id:PropTypes.number.isRequired,
-    img:PropTypes.string,
-    title:PropTypes.string.isRequired,
-    description:PropTypes.string
-  }).isRequired,
-  onSave: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
+
+const mapStateToProps = (state) => {
+  return {
+    film: state.filmToEdit
+  };
 }
 
-export default EditModal;
+const mapDispatchToProps= (dispatch) => {
+  return {
+    closeEdit : () => dispatch(closeEditModal()),
+    save : (film) => dispatch(saveFilm(film))
+  };
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(EditModal);

@@ -1,20 +1,27 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 import FilmCard from './Film/Film';
+
+import {fetchData, openEditModal} from '../../actions/actions';
 
 import './Films.css';
 
 
 class Films extends Component{
 
+  componentDidMount(){
+    this.props.getFilms();
+  }
+
   render(){
-    const films = this.props.filmsList.map(film => {
+    const films = this.props.films.map(film => {
       return <FilmCard 
-              key={film.id} 
-              title={film.title} 
-              src={film.img} 
-              description={film.description}
-              id={film.id}
+              key={film.imdbID} 
+              title={film.Title} 
+              src={film.Poster}
+              year={film.Year}
+              id={film.imdbID}
               clicked={this.props.editFilm}/>
     } )
     return ( 
@@ -25,13 +32,20 @@ class Films extends Component{
 }
 
 Films.propTypes = {
-  filmsList:PropTypes.arrayOf(PropTypes.shape({
-    id:PropTypes.number.isRequired,
-    img:PropTypes.string,
-    title:PropTypes.string.isRequired,
-    description:PropTypes.string
-  })).isRequired,
   editFilm:PropTypes.func
 }
 
-export default Films;
+const mapStateToProps = (state) => {
+  return {
+    films: state.films
+  };
+}
+
+const mapDispatchToProps= (dispatch) => {
+  return {
+    getFilms : () => dispatch(fetchData()),
+    editFilm : (id) => dispatch(openEditModal(id))
+  };
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Films);
