@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import FilmCard from '../Films/Film/Film';
 import {getFilm} from '../../actions/actions';
-import {FilmDetails} from '../../interface';
+import {FilmDetails} from '../../interface/index';
 import {Link} from 'react-router-dom';
 
 const StyledView = styled.div`

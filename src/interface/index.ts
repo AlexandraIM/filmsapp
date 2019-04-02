@@ -5,7 +5,6 @@ export interface HeaderProps {
 
 export interface FilmsProps {
   films: Array<Film>,
-  editFilm: Function,
   getFilms: Function
 }
 
@@ -23,7 +22,7 @@ export interface FilmEdit{
   save: Function
 }
 
-interface Film{
+export interface Film{
   id:string,
   Title:string,
   Poster:string,
