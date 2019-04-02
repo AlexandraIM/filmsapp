@@ -59,7 +59,10 @@ class Details extends React.Component<FilmDetails>{
           <img alt="film poster" src={this.props.film.Poster}></img>
           <p>{this.props.film.Year}</p>
           <Button color="blue" clicked={this.handleEditFilm}>Edit</Button>
-          <Button color="lightblue" clicked={this.handleBack}>Back</Button>
+          <Link to='/'>
+            <Button color="lightblue" clicked={null}>Back</Button>
+          </Link>
+          
         </StyledView>
         <StyledFilmsList>
           {films}

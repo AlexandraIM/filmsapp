@@ -12,9 +12,13 @@ class App extends React.Component {
     return (
       <div>
         <Header header="Some cool films"/>
-        <Route exact path='/' component={Dashboard}/>
+        <Route exact 
+        path='/' 
+        component={Dashboard}></Route>
+        
         <Route exact path='/film/:id' component={Details}/>
         <Route exact path='/film/:id/edit' component={EditPage}/>
+        
       </div>
     );
   }

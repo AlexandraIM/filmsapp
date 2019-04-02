@@ -20,20 +20,19 @@ class Films extends React.Component<FilmsProps>{
   }
 
   render(){
-    const films = this.props.films.map(film => {
-      return <Link to={`/film/${film.id}`} key={film.id} >
-                <FilmCard 
-                  title={film.Title} 
-                  src={film.Poster}
-                  year={film.Year}
-                  id={film.id}
-                  clicked={() => {console.log("test");
-                  }}/>
-              </Link>
-    } )
     return ( 
       <StyledFilmsList>
-        {films}
+        {this.props.films.map(film => {
+          return <Link to={`/film/${film.id}`} key={film.id} >
+                    <FilmCard 
+                      title={film.Title} 
+                      src={film.Poster}
+                      year={film.Year}
+                      id={film.id}
+                      clicked={() => {console.log("test");
+                      }}/>
+                  </Link>
+        } )}
       </StyledFilmsList>)
   }
 }
