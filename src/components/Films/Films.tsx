@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect} from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import FilmCard from './Film/Film';
@@ -13,16 +13,14 @@ const StyledFilmsList = styled.div`
   flex-wrap: wrap;
 `
 
-class Films extends React.Component<FilmsProps>{
+const Films = (props:FilmsProps) => {
+    useEffect(() => {
+      props.getFilms();
+    });
 
-  componentDidMount(){
-    this.props.getFilms();
-  }
-
-  render(){
     return ( 
       <StyledFilmsList>
-        {this.props.films.map(film => {
+        {props.films.map(film => {
           return <Link to={`/film/${film.id}`} key={film.id} >
                     <FilmCard 
                       title={film.Title} 
@@ -34,7 +32,6 @@ class Films extends React.Component<FilmsProps>{
                   </Link>
         } )}
       </StyledFilmsList>)
-  }
 }
 
 
