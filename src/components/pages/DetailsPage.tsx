@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 import { connect } from 'react-redux';
@@ -24,30 +24,32 @@ const StyledFilmsList = styled.div`
   flex-wrap: wrap;
 `
 
-class Details extends React.Component<FilmDetails>{
-
-  componentDidMount(){
+//class Details extends React.Component<FilmDetails>{
+const Details = (props:FilmDetails ) => {
+  /*componentDidMount(){
     this.props.getFilm(this.props.match.params.id)
+  }*/
+  useEffect(() => {
+    props.getFilm(props.match.params.id)
+  },[]);
+    
+  const handleEditFilm = function() {
+    props.history.push(props.match.url + '/edit');
   }
 
-  handleEditFilm = () => {
-    console.log("handleEditFilm",this.props);
-    this.props.history.push(this.props.match.url + '/edit');
+  const handleBack = () =>{
+    props.history.goBack();
   }
 
-  handleBack = () => {
-    this.props.history.goBack();
-  }
-
-  render () {
-    const films = this.props.films.map(film => {
+  
+    const films = props.films.map(film => {
       return <Link to={`/film/${film.id}`} key={film.id} >
                 <FilmCard 
                   title={film.Title} 
                   src={film.Poster}
                   year={film.Year}
                   id={film.id}
-                  clicked={() => {this.props.getFilm(film.id);
+                  clicked={() => {props.getFilm(film.id);
                   }}/>
               </Link>
     })
@@ -55,10 +57,10 @@ class Details extends React.Component<FilmDetails>{
     return (
       <div>
         <StyledView>
-          <h2>{this.props.film.Title}</h2>
-          <img alt="film poster" src={this.props.film.Poster}></img>
-          <p>{this.props.film.Year}</p>
-          <Button color="blue" clicked={this.handleEditFilm}>Edit</Button>
+          <h2>{props.film.Title}</h2>
+          <img alt="film poster" src={props.film.Poster}></img>
+          <p>{props.film.Year}</p>
+          <Button color="blue" clicked={handleEditFilm}>Edit</Button>
           <Link to='/'>
             <Button color="lightblue" clicked={null}>Back</Button>
           </Link>
@@ -69,7 +71,7 @@ class Details extends React.Component<FilmDetails>{
         </StyledFilmsList>
       </div>
     )
-  }
+  
 }
 
 const mapStateToProps = (state) => {

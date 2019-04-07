@@ -16,7 +16,7 @@ const StyledFilmsList = styled.div`
 const Films = (props:FilmsProps) => {
     useEffect(() => {
       props.getFilms();
-    });
+    },[]);
 
     return ( 
       <StyledFilmsList>
