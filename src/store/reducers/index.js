@@ -1,5 +1,4 @@
-import { GET_MOVIES,GET_FILM,SAVE_FILM} from '../actions/actions';
-
+import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   films:[],
@@ -8,12 +7,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_MOVIES:
+    case actionTypes.GET_MOVIES:
+      console.log(action.data)
       return {
         ...state,
         films: action.data
       }
-    case SAVE_FILM:{
+    case actionTypes.SAVE_FILM:{
       const films = [...state.films];
       const filmToUpdate = films.findIndex(f => f.id === action.film.id);
       films[filmToUpdate] = action.film;
@@ -23,9 +23,7 @@ const reducer = (state = initialState, action) => {
         filmToShow: action.film
       }
     }
-    case GET_FILM: {
-      console.log(action.filmId);
-      
+    case actionTypes.GET_FILM: {
       return {
         ...state,
         filmToShow: state.films.find(film => film.id === action.filmId)

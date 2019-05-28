@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import FilmCard from '../Films/Film/Film';
-import {getFilm} from '../../actions/actions';
+import {getFilm} from '../../store/actions/actions';
 import {FilmDetails} from '../../interface/index';
 import {Link} from 'react-router-dom';
 

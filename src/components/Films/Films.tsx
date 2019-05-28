@@ -5,7 +5,7 @@ import FilmCard from './Film/Film';
 import {FilmsProps} from '../../interface';
 import {Link} from 'react-router-dom';
 
-import {fetchData} from '../../actions/actions';
+import {fetchData} from '../../store/actions/actions';
 
 const StyledFilmsList = styled.div`
   display: flex;

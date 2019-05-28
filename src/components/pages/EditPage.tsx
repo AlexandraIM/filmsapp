@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import FilmCard from '../Films/Film/Film';
-import {getFilm} from '../../actions/actions';
+import {getFilm} from '../../store/actions/actions';
 import {FilmEdit} from '../../interface/index';
 import {NavLink} from 'react-router-dom';
-import {saveToDb} from '../../actions/actions';
+import {saveToDb} from '../../store/actions/actions';
 
 
 const StyledEditForm = styled.div`
